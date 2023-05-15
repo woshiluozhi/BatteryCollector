@@ -20,6 +20,8 @@ ABatteryCollectorGameMode::ABatteryCollectorGameMode()
 	DecayRate = 0.01f;
 
 	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bStartWithTickEnabled = true;
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 //void ABatteryCollectorGameMode::Tick(float DeltaTime)

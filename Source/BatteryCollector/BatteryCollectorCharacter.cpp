@@ -52,17 +52,16 @@ ABatteryCollectorCharacter::ABatteryCollectorCharacter()
 	CollectionSphere->SetupAttachment(RootComponent);
 	CollectionSphere->SetSphereRadius(200.f);
 
-	//// Create the collection sphere
-	//CollectionSphere = CreateDefaultSubobject<USphereComponent>(TEXT("CollectionSphere"));
-	//CollectionSphere->AttachTo(RootComponent);
-	//CollectionSphere->SetSphereRadius(200.f);
-
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 
 	//Set a base power level for the character
 	InitialPower = 2000.0f;
 	CharacterPower = InitialPower;
+
+	//set the dependence of the speed on the power level
+	SpeedFactor = 0.75f;
+	BaseSpeed = 10.0f;
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -216,7 +215,7 @@ void ABatteryCollectorCharacter::UpdatePower(float PowerChange)
 	// change power
 	CharacterPower = CharacterPower + PowerChange;
 	// change speed based on power
-	//GetCharacterMovement()->MaxWalkSpeed = BaseSpeed + SpeedFactor * CharacterPower;
+	GetCharacterMovement()->MaxWalkSpeed = BaseSpeed + SpeedFactor * CharacterPower;
 	//// call visual effect
-	//PowerChangeEffect();
+	PowerChangeEffect();
 }
